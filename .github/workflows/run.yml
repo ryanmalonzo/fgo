@@ -33,4 +33,3 @@ jobs:
           UserAgent: ${{ secrets.GAME_USERAGENT }}
           fateRegion: ${{ secrets.GAME_REGION }}
           webhookDiscord: ${{ secrets.DISCORD_WEBHOOK }}
-          MAKE_BLUE_APPLE: ${{ secrets.MAKE_BLUE_APPLE }}
