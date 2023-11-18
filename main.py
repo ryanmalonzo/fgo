@@ -31,7 +31,7 @@ coloredlogs.install(fmt="%(asctime)s %(name)s %(levelname)s %(message)s")
 
 def check_blue_apple_cron(instance):
     logger.info("Trying buy one blue apple!")
-    instance.buyBlueApple(1)
+    instance.buyBlueApple(3)
     time.sleep(2)
 
 
