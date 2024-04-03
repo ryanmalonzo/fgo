@@ -26,8 +26,8 @@ def topLogin(data: list) -> None:
         "content": None,
         "embeds": [
             {
-                "title": "FGO Daily Bonus - " + main.fate_region,
-                "description": f"Scheduled Login Fate/Grand Order.\n\n{messageBonus}",
+                "title": f"FGO {main.fate_region} Login",
+                "description": f"Fate/Grand Order Scheduled Login\n\n{messageBonus}",
                 "color": 563455,
                 "fields": [
                     {
@@ -55,21 +55,21 @@ def topLogin(data: list) -> None:
                         "value": f"{login.total_days}",
                         "inline": True,
                     },
-                    {
-                        "name": "Total Friend Points",
-                        "value": f"{login.total_fp}",
-                        "inline": True,
-                    },
-                    {
-                        "name": "Friend Points",
-                        "value": f"+{login.add_fp}",
-                        "inline": True,
-                    },
-                    {
-                        "name": "Ap Max",
-                        "value": f"{login.act_max}",
-                        "inline": True,
-                    },
+                    # {
+                    #     "name": "Total Friend Points",
+                    #     "value": f"{login.total_fp}",
+                    #     "inline": True,
+                    # },
+                    # {
+                    #     "name": "Friend Points",
+                    #     "value": f"+{login.add_fp}",
+                    #     "inline": True,
+                    # },
+                    # {
+                    #     "name": "Ap Max",
+                    #     "value": f"{login.act_max}",
+                    #     "inline": True,
+                    # },
                 ],
                 "thumbnail": {
                     "url": "https://grandorder.wiki/images/thumb/3/3d/Icon_Item_Saint_Quartz.png/200px-Icon_Item_Saint_Quartz.png"

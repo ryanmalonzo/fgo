@@ -58,15 +58,15 @@ def main():
             try:
                 instance = user.user(userIds[i], authKeys[i], secretKeys[i])
                 time.sleep(3)
-                logger.info("Loggin into account!")
+                logger.info("Logging into account")
                 instance.topLogin()
                 time.sleep(2)
                 instance.topHome()
-                time.sleep(2)
+                # time.sleep(2)
                 # logger.info('Throw daily friend summon!')
                 # instance.drawFP()
-                time.sleep(2)
-                check_blue_apple_cron(instance)
+                # time.sleep(2)
+                # check_blue_apple_cron(instance)
             except Exception as ex:
                 logger.error(ex)
 
