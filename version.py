@@ -1,15 +1,8 @@
-# Thanks to atlas academy for this script!
-# All credits to atlas
-# Github: github.com/atlasacademy
-# Website: atlasacademy.io
-# Api: api.atlasacademy.io
-# Apps: apps.atlasacademy.io
-
 import re
 import time
 
-import json5
 import httpx
+import json5
 import lxml.html
 
 PLAY_STORE_URL = {
@@ -29,7 +22,9 @@ APP_STORE_URL = {
 
 PLAY_STORE_XPATH_1 = "/html/body/div[1]/div[4]/c-wiz/div/div[2]/div/div/main/c-wiz[4]/div[1]/div[2]/div/div[4]/span/div/span"
 PLAY_STORE_XPATH_2 = "/html/body/div[1]/div[4]/c-wiz/div/div[2]/div/div/main/c-wiz[3]/div[1]/div[2]/div/div[4]/span/div/span"
-PLAY_STORE_XPATH_3 = '//div[div[text()="Current Version"]]/span/div/span/text()'
+PLAY_STORE_XPATH_3 = (
+    '//div[div[text()="Current Version"]]/span/div/span/text()'
+)
 VERSION_REGEX = re.compile(r"^\d+\.\d+\.\d+$")
 
 
@@ -46,7 +41,9 @@ def get_play_store_ver(region: str):
     if region == "CN":
         return get_CN_android_version()
 
-    play_store_response = httpx.get(PLAY_STORE_URL[region], follow_redirects=True)
+    play_store_response = httpx.get(
+        PLAY_STORE_URL[region], follow_redirects=True
+    )
     play_store_html = lxml.html.fromstring(play_store_response.text)
 
     for xpath in (PLAY_STORE_XPATH_1, PLAY_STORE_XPATH_2, PLAY_STORE_XPATH_3):
@@ -54,7 +51,7 @@ def get_play_store_ver(region: str):
             xpath_version: str = play_store_html.xpath(xpath)[0].text
             if VERSION_REGEX.match(xpath_version):
                 return xpath_version
-        except:  # pylint: disable=bare-except
+        except Exception:
             continue
 
     for match in re.finditer(
@@ -72,10 +69,12 @@ def get_play_store_ver(region: str):
                 return data["data"][1]
 
             deep_version = data["data"][1][2][140][0][0][0]
-            if isinstance(deep_version, str) and VERSION_REGEX.match(deep_version):
+            if isinstance(deep_version, str) and VERSION_REGEX.match(
+                deep_version
+            ):
                 return deep_version
 
-        except:  # pylint: disable=bare-except
+        except Exception:
             pass
 
     return None
@@ -101,3 +100,4 @@ def get_version(region: str) -> None:
     app_store_version = get_app_store_ver(region)
     if app_store_version is not None:
         return app_store_version
+

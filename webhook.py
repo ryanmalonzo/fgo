@@ -17,7 +17,7 @@ def topLogin(data: list) -> None:
     if bonus != "No Bonus":
         messageBonus += f"__{bonus.message}__{nl}```{nl.join(bonus.items)}```"
 
-        if bonus.bonus_name != None:
+        if bonus.bonus_name is not None:
             messageBonus += f"{nl}__{bonus.bonus_name}__{nl}{bonus.bonus_detail}{nl}```{nl.join(bonus.bonus_camp_items)}```"
 
         messageBonus += "\n"
@@ -30,8 +30,16 @@ def topLogin(data: list) -> None:
                 "description": f"Scheduled Login Fate/Grand Order.\n\n{messageBonus}",
                 "color": 563455,
                 "fields": [
-                    {"name": "Level", "value": f"{rewards.level}", "inline": True},
-                    {"name": "Tickets", "value": f"{rewards.ticket}", "inline": True},
+                    {
+                        "name": "Level",
+                        "value": f"{rewards.level}",
+                        "inline": True,
+                    },
+                    {
+                        "name": "Tickets",
+                        "value": f"{rewards.ticket}",
+                        "inline": True,
+                    },
                     {
                         "name": "Saint Quartz",
                         "value": f"{rewards.stone}",
@@ -57,7 +65,11 @@ def topLogin(data: list) -> None:
                         "value": f"+{login.add_fp}",
                         "inline": True,
                     },
-                    {"name": "Ap Max", "value": f"{login.act_max}", "inline": True},
+                    {
+                        "name": "Ap Max",
+                        "value": f"{login.act_max}",
+                        "inline": True,
+                    },
                 ],
                 "thumbnail": {
                     "url": "https://grandorder.wiki/images/thumb/3/3d/Icon_Item_Saint_Quartz.png/200px-Icon_Item_Saint_Quartz.png"
@@ -80,16 +92,18 @@ def shop(item: str, quantity: str) -> None:
         "embeds": [
             {
                 "title": "FGO Daily Bonus - " + main.fate_region,
-                "description": f"Scheduled Blue Apple Fate/Grand Order.",
+                "description": "Scheduled Blue Apple Fate/Grand Order.",
                 "color": 5814783,
                 "fields": [
                     {
-                        "name": f"Shop Purchase",
+                        "name": "Shop Purchase",
                         "value": f"You exchange {40 * quantity}Ap for {quantity}x {item}",
                         "inline": False,
                     }
                 ],
-                "thumbnail": {"url": "https://static.atlasacademy.io/JP/Items/104.png"},
+                "thumbnail": {
+                    "url": "https://static.atlasacademy.io/JP/Items/104.png"
+                },
             }
         ],
         "attachments": [],
@@ -108,7 +122,7 @@ def drawFP(servants, missions) -> None:
 
     if len(servants) > 0:
         servants_atlas = requests.get(
-            f"https://api.atlasacademy.io/export/JP/basic_svt_lang_en.json"
+            "https://api.atlasacademy.io/export/JP/basic_svt_lang_en.json"
         ).json()
 
         svt_dict = {svt["id"]: svt for svt in servants_atlas}
@@ -119,9 +133,7 @@ def drawFP(servants, missions) -> None:
 
     if len(missions) > 0:
         for mission in missions:
-            message_mission += (
-                f"__{mission.message}__\n{mission.progressTo}/{mission.condition}\n"
-            )
+            message_mission += f"__{mission.message}__\n{mission.progressTo}/{mission.condition}\n"
 
     jsonData = {
         "content": None,
